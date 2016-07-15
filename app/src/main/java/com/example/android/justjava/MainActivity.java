@@ -18,13 +18,13 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     int quantity=0;
+    int perPrice=5;
     /**
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage="free";
+        String priceMessage=createOrderSummary(perPrice);
         displayMessage(priceMessage);
     }
 
@@ -39,6 +39,13 @@ public class MainActivity extends ActionBarActivity {
     {
         quantity=quantity - 1;
         display(quantity);
+    }
+
+
+
+    private String createOrderSummary(int perPrice)
+    {
+        return "Name : Sabrina"+"\nQuantity : "+quantity+"\nTotal : $"+quantity*perPrice+"\nThank you!";
     }
 
     /**
@@ -63,4 +70,5 @@ public class MainActivity extends ActionBarActivity {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
     }
+
 }
