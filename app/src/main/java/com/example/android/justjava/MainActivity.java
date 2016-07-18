@@ -3,6 +3,8 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -10,40 +12,49 @@ import android.widget.TextView;
  */
 public class MainActivity extends ActionBarActivity {
 
+    int quantity = 0;
+    int perPrice = 5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
-    int quantity=0;
-    int perPrice=5;
     /**
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage=createOrderSummary(perPrice);
+        CheckBox whippedcream_checkbox = (CheckBox) findViewById(R.id.whippedcream_checkbox);
+        boolean addWhippedcream = whippedcream_checkbox.isChecked();
+        CheckBox chocolate_checkbox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        boolean addChocolate = chocolate_checkbox.isChecked();
+        EditText txtname = (EditText)findViewById(R.id.name_view);
+        String name  =  txtname.getText().toString();
+        String priceMessage = createOrderSummary(perPrice, addWhippedcream, addChocolate,name);
         displayMessage(priceMessage);
     }
 
-    public void increment(View view)
-    {
-        quantity=quantity + 1;
+    public void increment(View view) {
+        quantity = quantity + 1;
         display(quantity);
     }
 
 
-    public void decrement(View view)
-    {
-        quantity=quantity - 1;
+    public void decrement(View view) {
+        quantity = quantity - 1;
         display(quantity);
     }
 
 
-
-    private String createOrderSummary(int perPrice)
-    {
-        return "Name : Sabrina"+"\nQuantity : "+quantity+"\nTotal : $"+quantity*perPrice+"\nThank you!";
+    private String createOrderSummary(int perPrice, boolean addWhippedcream, boolean addChocolate,String name) {
+        String lalala = "Name : "+name;
+        lalala += "\nAdd Whipped cream? " + addWhippedcream;
+        lalala += "\nAdd Chocolate? " + addChocolate;
+        lalala += "\nQuantity : " + quantity;
+        lalala += "\nTotal : $" + quantity * perPrice;
+        lalala += "\nThank you!";
+        return lalala;
     }
 
     /**
