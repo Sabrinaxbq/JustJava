@@ -1,5 +1,7 @@
 package com.example.android.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -29,11 +31,21 @@ public class MainActivity extends ActionBarActivity {
         boolean addWhippedcream = whippedcream_checkbox.isChecked();
         CheckBox chocolate_checkbox = (CheckBox) findViewById(R.id.chocolate_checkbox);
         boolean addChocolate = chocolate_checkbox.isChecked();
-        EditText txtname = (EditText)findViewById(R.id.name_view);
-        String name  =  txtname.getText().toString();
-        String priceMessage = createOrderSummary(perPrice, addWhippedcream, addChocolate,name);
+        EditText txtname = (EditText) findViewById(R.id.name_view);
+        String name = txtname.getText().toString();
+        String priceMessage = createOrderSummary(perPrice, addWhippedcream, addChocolate, name);
+
+
+        Uri webpage = Uri.parse("http://www.google.com");
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+
+        }
         displayMessage(priceMessage);
     }
+
+
 
     public void increment(View view) {
         quantity = quantity + 1;
@@ -47,8 +59,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    private String createOrderSummary(int perPrice, boolean addWhippedcream, boolean addChocolate,String name) {
-        String lalala = "Name : "+name;
+    private String createOrderSummary(int perPrice, boolean addWhippedcream, boolean addChocolate, String name) {
+        String lalala = "Name : " + name;
         lalala += "\nAdd Whipped cream? " + addWhippedcream;
         lalala += "\nAdd Chocolate? " + addChocolate;
         lalala += "\nQuantity : " + quantity;
